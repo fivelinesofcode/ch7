@@ -66,3 +66,13 @@ resource "google_project_iam_member" "cloudbuild_roles" {
   role    = each.key
   member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
 }
+
+resource "google_storage_bucket" "default" {
+  name = "bucket-tfstate"
+  force_destroy = false
+  location = "US-CENTRAL1"
+  storage_class = "STANDARD"
+  versioning = {
+    enabled = true
+  }
+}
